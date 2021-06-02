@@ -6,13 +6,12 @@
         class="button is-primary"
         @click="$eventBus.$emit('modal-triggered', 'newsletter-modal')"
       >
-        Subscribe To Newsletter
+        Contact us to find out more
       </button>
     </site-hero>
     <main-section theme="one-column">
       <template v-slot:default>
-        <!-- All Posts -->
-        <posts-grid />
+        <knowledge-links></knowledge-links>
       </template>
       <template v-slot:sidebar>
         Nothing here
@@ -26,6 +25,7 @@
 import { mapState } from 'vuex'
 import { setPageData } from '../helper'
 import NewsLetterFormModal from '~/components/NewsLetterFormModal'
+import KnowledgeLinks from '~/components/KnowledgeLinks'
 
 export default {
   name: 'HomePage',
@@ -35,7 +35,8 @@ export default {
     }
   },
   components: {
-    NewsLetterFormModal
+    NewsLetterFormModal,
+    KnowledgeLinks
   },
   computed: {
     ...mapState(['title', 'subtitle', 'featureImage'])

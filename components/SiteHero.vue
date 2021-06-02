@@ -2,9 +2,8 @@
   <section :class="`hero is-medium hero-theme-${computedTheme}`">
     <img
       class="hero-bg-img"
-      :src="responsiveImage.src"
+      :src="require(`~/assets${this.image}`)"
       :lazy="false"
-      :srcset="responsiveImage.srcSet"
     />
     <div class="hero-body">
       <div class="container">
@@ -36,12 +35,6 @@ export default {
     theme: { type: String, default: '' }
   },
   computed: {
-    responsiveImage() {
-      if (this.image.indexOf('/uploads') === 0) {
-        return require(`~/assets${this.image}`)
-      }
-      return { src: this.image, srcSet: '' }
-    },
     computedTheme() {
       if (this.theme === '' && this.$siteConfig.hero.theme) {
         return this.$siteConfig.hero.theme

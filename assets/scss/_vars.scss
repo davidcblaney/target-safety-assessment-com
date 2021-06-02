@@ -1,8 +1,15 @@
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 
+/* SCSS HEX */
+$cambridge-blue: #a3bbadff;
+$midnight-green-eagle-green: #0b5563ff;
+$independence: #5e5c6cff;
+$yellow-orange: #ffa630ff;
+$cg-red: #dd403aff;
+
 // Set your colors
-$primary: #00d1b2;
+$primary: #0b5563ff;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
