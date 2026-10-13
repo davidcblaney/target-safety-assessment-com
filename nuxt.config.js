@@ -7,17 +7,27 @@ import build from './config/build'
 import css from './config/css'
 import { routeMap, otherRoutes } from './config/generate'
 
+// Path the site is served from, e.g. '/repo-name/' for GitHub Pages
+const base = process.env.DEPLOY_BASE || '/'
+
 export default {
   target: 'static',
   /*
    ** Customize the progress-bar color
    */
   loading: { color: '#fff' },
+  router: { base },
+  env: { DEPLOY_BASE: base },
 
   /*
    ** Headers of the page
    */
-  head: head,
+  head: {
+    ...head,
+    link: head.link.map((link) => {
+      return { ...link, href: link.href.replace(/^\//, base) }
+    })
+  },
   generate: {
     routes: otherRoutes.concat(getDynamicPaths(routeMap))
   },
@@ -34,6 +44,7 @@ export default {
    */
   modules: modules,
   ...modulesSettings,
+  axios: { browserBaseURL: base, ...modulesSettings.axios },
   /*
    ** Build configuration
    */

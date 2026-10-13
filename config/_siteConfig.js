@@ -12,7 +12,7 @@ export default {
   siteName: 'Target Safety Assessment',
   tagline: 'Knowledge Discovery Tool for Target Safety Assessment',
   featureImage: '/uploads/home-hero.jpg',
-  logo: '/logo.svg', // 'logo-component', // or '/logo.svg' for regular image
+  logo: (process.env.DEPLOY_BASE || '/') + 'logo.svg', // 'logo-component', // or '/logo.svg' for regular image
   googleAnalytics: {
     on: true,
     id: process.env.GOOGLE_ANALYTICS_ID

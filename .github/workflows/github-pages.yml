@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master, claude/repo-build-deploy-8hpkmp]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # node-sass 5 and webpack 4 in this project only build on Node 14
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 14
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run generate
+        env:
+          DEPLOY_BASE: /${{ github.event.repository.name }}/
+
+      # Serve the SPA fallback for routes that weren't pre-rendered, and stop
+      # Jekyll from hiding the _nuxt directory
+      - run: |
+          cp dist/200.html dist/404.html
+          touch dist/.nojekyll
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
