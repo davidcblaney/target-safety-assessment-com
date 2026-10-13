@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/", {data:[{}],fetch:[],mutations:[["set",{title:"Target Safety Assessment",subtitle:"Knowledge Discovery Tool for Target Safety Assessment",featureImage:"\u002Fuploads\u002Fhome-hero.jpg"}]]});
